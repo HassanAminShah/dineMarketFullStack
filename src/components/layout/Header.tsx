@@ -13,7 +13,6 @@ const Header = () => {
   const ToggleNavbar = (): void => {
     setOpen(!open);
   };
-
   const links = [
     {
       lname: "Female",
@@ -44,8 +43,8 @@ const Header = () => {
         </Link>
         <div className="flex items-center">
           <div className="flex justify-between gap-x-8 items-center lg:text-lg ">
-            {links.map((link) => (
-              <div>
+            {links.map((link, index) => (
+              <div key={index}>
                 <Link href={link.href} key={link.href}>
                   {link.lname}
                 </Link>
@@ -134,7 +133,7 @@ const Header = () => {
         </button>
       </div>
       {open && (
-        <div className="lg:hidden h-[100vh] bg-white  flex flex-col justify-start pt-20 items-center gap-y-7">
+        <div className="lg:hidden h-[100vh]  bg-white  flex flex-col justify-start pt-20 items-center gap-y-7">
           <div className="relative">
             <div className="w-12 h-12 rounded-full bg-slate-100 flex justify-center items-center">
               <svg
@@ -159,9 +158,13 @@ const Header = () => {
               {totalItems ? totalItems : 0}
             </div>
           </div>
-          {links.map((link) => (
-            <div>
-              <Link href={link.href} key={link.href}>
+          {links.map((link, index) => (
+            <div key={index}>
+              <Link
+                href={link.href}
+                key={link.href}
+                onClick={() => setOpen(!open)}
+              >
                 {link.lname}
               </Link>
             </div>

@@ -40,7 +40,7 @@ const Home = async () => {
       <div className=" py-10 max-w-screen-2xl w-full mx-auto">
         <div className="flex flex-wrap justify-center sm:justify-between gap-y-10 px-[8.5%]">
           {data.map((product: IProduct) => (
-            <Link href={`/${product.category.name}`}>
+            <Link href={`/${product.category.name}`} key={product._id}>
               <div key={product._id} className="font-bold  lg:px-2 px-1 ">
                 <Image
                   src={urlForImage(product.image).url()}
