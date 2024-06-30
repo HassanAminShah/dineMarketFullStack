@@ -112,12 +112,12 @@ const page = async ({ params }: { params: { slug: string } }) => {
             {/* Quantity */}
 
             <div className="py-3 md:py-5">
-              {/* <h1 className="font-extrabold text-xl text-gray-700">
-                Quantity : <Quantity product={data[0]} qty={1} />
-              </h1> */}
               <h1 className="font-extrabold text-xl text-gray-700">
-                <AddtoCartProduct product={data} qty={1} userId={""} />
+                Quantity : <Quantity product={data[0]} qty={1} />
               </h1>
+              {/* <h1 className="font-extrabold text-xl text-gray-700">
+                <AddtoCartProduct product={data} qty={1} userId={""} />
+              </h1> */}
             </div>
           </div>
         </div>
