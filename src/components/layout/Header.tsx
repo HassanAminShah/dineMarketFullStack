@@ -103,6 +103,7 @@ const Header = () => {
             <Image src={logo} width={140} height={25} alt={""} />
           </div>
         </Link>
+
         <button
           className=" inline-flex items-center justify-center text-black"
           onClick={ToggleNavbar}

@@ -42,7 +42,7 @@ const ProductCard = async () => {
           opts={{
             align: "start",
           }}
-          className="w-full max-w-[63%] sm:max-w-[67%] lg:max-w-[90%] xl:max-w-[88%] flex justify-between"
+          className="w-full max-w-[63%] sm:max-w-[67%] lg:max-w-[80%] xl:max-w-[77%] flex justify-between"
         >
           <CarouselContent>
             {data.map((product: IProduct) => (
@@ -67,8 +67,8 @@ const ProductCard = async () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          {/* <CarouselPrevious /> */}
-          {/* <CarouselNext /> */}
+          <CarouselPrevious />
+          <CarouselNext />
         </Carousel>
       </div>
     </div>

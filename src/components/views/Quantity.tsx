@@ -2,17 +2,19 @@
 import { cartActions } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/store";
 import { Image } from "sanity";
+import { Toaster, toast } from "react-hot-toast";
 
 import React, { useState } from "react";
+import { urlForImage } from "../../../sanity/lib/image";
 export interface Product {
   _id: string;
   name: string;
   price: number;
   totalPrice: number;
-  subCat: string;
+  subcat: string;
   image: Array<Image>;
   userId: string;
-  qunatity: number;
+  quantity: number;
 }
 
 type IProps = {
@@ -24,7 +26,41 @@ const Quantity = (props: IProps) => {
   const [num, setNum] = useState(1);
   const dispatch = useAppDispatch();
 
+  const handleAddToCart = async () => {
+    console.log("handle add to cart");
+
+    const res = await fetch("/api/cart/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        product_id: props.product._id,
+        product_name: props.product.name,
+        quantity: num,
+        image: urlForImage(props.product.image[0]).url(),
+        price: props.product.price,
+        subcat: props.product.subcat,
+        total_price: props.product.price * num,
+
+        // product_id: 1,
+        // product_name: history,
+        // quantity: num,
+        // price: 1,
+        // total_price: 50,
+      }),
+    });
+
+    return res.json();
+  };
+
   const addToCart = () => {
+    console.log("add to cart");
+    toast.promise(handleAddToCart(), {
+      loading: "Adding to cart...",
+      success: "Added to cart!",
+      error: "Could not add to cart.",
+    });
     dispatch(cartActions.addToCart({ product: props.product, quantity: num }));
   };
 

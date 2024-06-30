@@ -8,6 +8,7 @@ import { urlForImage } from "../../../../sanity/lib/image";
 import Link from "next/link";
 import Wrapper from "@/components/layout/Wrapper";
 import Quantity from "@/components/views/Quantity";
+import AddtoCartProduct from "@/components/shared/AddToCartProduct";
 // import AddToCartButton from "@/components/Button";
 // import { auth } from "@clerk/nextjs";
 
@@ -111,8 +112,11 @@ const page = async ({ params }: { params: { slug: string } }) => {
             {/* Quantity */}
 
             <div className="py-3 md:py-5">
+              {/* <h1 className="font-extrabold text-xl text-gray-700">
+                Quantity : <Quantity product={data[0]} qty={1} />
+              </h1> */}
               <h1 className="font-extrabold text-xl text-gray-700">
-                Quantity : <Quantity product={data} qty={1} />
+                <AddtoCartProduct product={data} qty={1} userId={""} />
               </h1>
             </div>
           </div>
