@@ -6,7 +6,7 @@ import Link from "next/link";
 
 async function getData() {
   const res = await client.fetch(`*[_type=="product"]{
-    title,image,alt,price,_id,category -> {
+    title,image,alt,subcat,price,_id,category -> {
       name
     }, ptype -> {
       name
@@ -17,6 +17,7 @@ async function getData() {
 
 interface IProduct {
   title: string;
+  subcat: string;
   image: IImage;
   alt: string;
   category: {
@@ -46,7 +47,7 @@ const Home = async () => {
                 />
                 <h1 className="pt-2">{product.title}</h1>
                 <p className="pt-1 text-lg">${product.price}</p>
-                <p className="pt-1">{product.category.name}</p>
+                <p className="pt-1">{product.subcat}</p>
               </div>
             </Link>
           ))}

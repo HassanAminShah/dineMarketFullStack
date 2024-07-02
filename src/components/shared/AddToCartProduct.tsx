@@ -10,11 +10,11 @@ import { Image } from "sanity";
 
 export interface Product {
   _id: string;
-  name: string;
+  title: string;
   price: number;
   totalPrice: number;
   subcat: string;
-  image: Array<Image>;
+  image: Image;
   userId: string;
   quantity: number;
 }
@@ -49,12 +49,19 @@ const AddtoCartProduct = (props: IProps) => {
       method: "POST",
       body: JSON.stringify({
         product_id: props.product._id,
-        quantity: qty,
-        image: urlForImage(props.product.image[0]).url(),
-        product_name: props.product.name,
-        subcat: props.product.subcat,
-        price: props.product.price,
-        totalPrice: props.product.price * props.qty,
+        // quantity: qty,
+        quantity: 1,
+
+        // image: urlForImage(props.product.image[0]).url(),
+        image: "urlForImage(props.product.image[0]).url()",
+        // product_name: props.product.name,
+        product_name: "props.product.name",
+        // subcat: props.product.subcat,
+        subcat: "props.product.subcat",
+        price: 1,
+        // price: props.product.price,
+        totalPrice: 1,
+        // totalPrice: props.product.price * props.qty,
       }),
     });
 

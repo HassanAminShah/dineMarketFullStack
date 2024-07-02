@@ -56,6 +56,11 @@ export const products = {
         title: "Category",
       },
     }),
+    defineField({
+      name: "subcat",
+      title: "Sub Category",
+      type: "string",
+    }),
     // defineField({
     //   name: "ptype",
     //   title: "Product Type",

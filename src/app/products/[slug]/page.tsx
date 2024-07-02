@@ -26,24 +26,18 @@ interface IProduct {
 
 export interface Product {
   _id: string;
-  name: string;
+  title: string;
   price: number;
   totalPrice: number;
-  subCat: string;
-  image: Array<Image1>;
+  subcat: string;
+  image: Image1;
   userId: string;
-  qunatity: number;
 }
 
 async function getData(slug: string) {
   const res = await client.fetch(
     `*[_type=="product" && alt==$slug]{
-      title,image,alt,price,quantity,_id,category -> {
-        name
-      }, ptype -> {
-        name
-      }
-    }`,
+    title,alt,price,_id,subcat,category -> {name},image,"urlImage":image.asset->url,_id}`,
     { slug }
   );
   return res;
@@ -53,6 +47,7 @@ const sizes = ["XS", "S", "M", "L", "XL"];
 
 const page = async ({ params }: { params: { slug: string } }) => {
   const data = await getData(params.slug);
+  console.log(data);
 
   return (
     <Wrapper>
@@ -85,6 +80,9 @@ const page = async ({ params }: { params: { slug: string } }) => {
             <h2 className="pt-10 text-xl sm:text-3xl font-semibold">
               {data[0].title}
             </h2>
+            <h2 className="pt-2 text-lg sm:text-3xl font-semibold">
+              {data[0].subcat}
+            </h2>
             {/* <div className="pdp">{data[0].ptype.name}</div> */}
             <h4></h4>
             <div className="pt-2 md:pt-5">
@@ -116,7 +114,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
                 Quantity : <Quantity product={data[0]} qty={1} />
               </h1>
               {/* <h1 className="font-extrabold text-xl text-gray-700">
-                <AddtoCartProduct product={data} qty={1} userId={""} />
+                <AddtoCartProduct product={data[0]} qty={1} userId={""} />
               </h1> */}
             </div>
           </div>

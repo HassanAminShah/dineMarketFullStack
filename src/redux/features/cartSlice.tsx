@@ -3,11 +3,11 @@ import { Image } from "sanity";
 import { RootState } from "../store";
 export interface Product {
   _id: string;
-  name: string;
+  title: string;
   price: number;
   totalPrice: number;
   subcat: string;
-  image: Array<Image>;
+  image: Image;
   userId: string;
   quantity: number;
 }

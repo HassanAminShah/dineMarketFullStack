@@ -8,11 +8,11 @@ import React, { useState } from "react";
 import { urlForImage } from "../../../sanity/lib/image";
 export interface Product {
   _id: string;
-  name: string;
+  title: string;
   price: number;
   totalPrice: number;
   subcat: string;
-  image: Array<Image>;
+  image: Image;
   userId: string;
   quantity: number;
 }
@@ -36,18 +36,12 @@ const Quantity = (props: IProps) => {
       },
       body: JSON.stringify({
         product_id: props.product._id,
-        product_name: props.product.name,
         quantity: num,
-        image: urlForImage(props.product.image[0]).url(),
+        product_name: props.product.title,
         price: props.product.price,
+        totalPrice: props.product.quantity * props.product.price,
+        image: urlForImage(props.product.image).url(),
         subcat: props.product.subcat,
-        total_price: props.product.price * num,
-
-        // product_id: 1,
-        // product_name: history,
-        // quantity: num,
-        // price: 1,
-        // total_price: 50,
       }),
     });
 
@@ -55,12 +49,13 @@ const Quantity = (props: IProps) => {
   };
 
   const addToCart = () => {
-    console.log("add to cart");
     toast.promise(handleAddToCart(), {
       loading: "Adding to cart...",
-      success: "Added to cart!",
-      error: "Could not add to cart.",
+      success: <b>Added to cart!</b>,
+      error: <b>Could not add to cart.</b>,
     });
+    console.log("add to cart");
+
     dispatch(cartActions.addToCart({ product: props.product, quantity: num }));
   };
 
@@ -106,6 +101,7 @@ const Quantity = (props: IProps) => {
         </span>
         Add To Cart
       </button>
+      <Toaster />
     </div>
   );
 };
